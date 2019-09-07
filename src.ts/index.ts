@@ -140,7 +140,7 @@ export function getContractAddress(transaction: { from: string, nonce: BigNumber
         logger.throwArgumentError("missing from address", "transaction", transaction);
     }
 
-    let nonce = stripZeros(arrayify(transaction.nonce));
+    let nonce = stripZeros(arrayify(transaction.nonce, {allowOddLength: true}));
 
     return getAddress(hexDataSlice(keccak256(encode([ from, nonce ])), 12));
 }
